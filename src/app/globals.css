@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body { @apply bg-[#08080c] text-white antialiased; font-family: "Inter", system-ui, sans-serif; }
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { @apply bg-transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-white/8 rounded-full hover:bg-white/15; }
+  ::selection { @apply bg-amber-500/30; }
+}
+
+@layer components {
+  .cinema-input { @apply w-full rounded-md bg-[#12121a] border border-white/8 px-3 py-1.5 text-sm text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500/50 transition-all; }
+  .cinema-select { @apply cinema-input appearance-none cursor-pointer; }
+  .cinema-label { @apply block text-[10px] font-medium text-white/40 uppercase tracking-wider mb-1; }
+  .cinema-badge-accent { @apply inline-flex items-center rounded-full px-1.5 py-0.5 text-[9px] font-medium bg-amber-500/15 text-amber-400; }
+  .cinema-btn { @apply inline-flex items-center justify-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-all focus:outline-none disabled:opacity-50 disabled:pointer-events-none; }
+  .cinema-btn-primary { @apply cinema-btn bg-amber-600 text-white hover:bg-amber-500; }
+  .cinema-btn-secondary { @apply cinema-btn bg-white/5 text-white/70 hover:bg-white/10 border border-white/8; }
+  .cinema-btn-ghost { @apply cinema-btn text-white/40 hover:text-white hover:bg-white/5; }
+}
+
+@keyframes slide-up { from { transform: translateY(8px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.animate-slide-up { animation: slide-up 0.2s ease-out; }

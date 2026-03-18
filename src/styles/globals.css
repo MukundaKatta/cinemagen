@@ -1,0 +1,197 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-cinema-black text-cinema-text antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-cinema-dark;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-cinema-border rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-cinema-muted;
+  }
+
+  ::selection {
+    @apply bg-cinema-accent/30 text-cinema-white;
+  }
+}
+
+@layer components {
+  .cinema-panel {
+    @apply bg-cinema-panel border border-cinema-border rounded-lg;
+  }
+
+  .cinema-input {
+    @apply bg-cinema-dark border border-cinema-border rounded-md px-3 py-2 text-sm text-cinema-text
+    placeholder:text-cinema-muted/50 focus:outline-none focus:border-cinema-accent focus:ring-1
+    focus:ring-cinema-accent/50 transition-all duration-200;
+  }
+
+  .cinema-select {
+    @apply bg-cinema-dark border border-cinema-border rounded-md px-3 py-2 text-sm text-cinema-text
+    focus:outline-none focus:border-cinema-accent focus:ring-1 focus:ring-cinema-accent/50
+    transition-all duration-200 appearance-none cursor-pointer;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23666' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
+
+  .cinema-btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md text-sm font-medium
+    transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .cinema-btn-primary {
+    @apply cinema-btn bg-cinema-accent text-white hover:bg-cinema-accent-hover
+    active:scale-[0.98] shadow-lg shadow-cinema-accent/20;
+  }
+
+  .cinema-btn-secondary {
+    @apply cinema-btn bg-cinema-surface text-cinema-text border border-cinema-border
+    hover:bg-cinema-border hover:text-cinema-white;
+  }
+
+  .cinema-btn-ghost {
+    @apply cinema-btn text-cinema-muted hover:text-cinema-text hover:bg-cinema-surface;
+  }
+
+  .cinema-btn-danger {
+    @apply cinema-btn bg-cinema-red/10 text-cinema-red border border-cinema-red/30
+    hover:bg-cinema-red/20;
+  }
+
+  .cinema-label {
+    @apply text-xs font-medium text-cinema-muted uppercase tracking-wider;
+  }
+
+  .cinema-slider {
+    @apply w-full h-1.5 bg-cinema-dark rounded-full appearance-none cursor-pointer
+    [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3.5
+    [&::-webkit-slider-thumb]:h-3.5 [&::-webkit-slider-thumb]:rounded-full
+    [&::-webkit-slider-thumb]:bg-cinema-accent [&::-webkit-slider-thumb]:shadow-md
+    [&::-webkit-slider-thumb]:shadow-cinema-accent/30 [&::-webkit-slider-thumb]:cursor-grab
+    [&::-webkit-slider-thumb]:active:cursor-grabbing
+    [&::-webkit-slider-thumb]:hover:bg-cinema-accent-hover;
+  }
+
+  .cinema-badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium;
+  }
+
+  .cinema-badge-accent {
+    @apply cinema-badge bg-cinema-accent/15 text-cinema-accent;
+  }
+
+  .cinema-badge-green {
+    @apply cinema-badge bg-cinema-green/15 text-cinema-green;
+  }
+
+  .cinema-badge-red {
+    @apply cinema-badge bg-cinema-red/15 text-cinema-red;
+  }
+
+  .cinema-badge-blue {
+    @apply cinema-badge bg-cinema-blue/15 text-cinema-blue;
+  }
+
+  .cinema-badge-gold {
+    @apply cinema-badge bg-cinema-gold/15 text-cinema-gold;
+  }
+
+  .film-grain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    animation: filmGrain 0.5s steps(1) infinite;
+  }
+
+  .timeline-track {
+    @apply relative h-16 bg-cinema-dark rounded border border-cinema-border overflow-hidden;
+  }
+
+  .timeline-clip {
+    @apply absolute top-1 bottom-1 rounded bg-cinema-accent/20 border border-cinema-accent/40
+    cursor-grab active:cursor-grabbing hover:bg-cinema-accent/30 transition-colors;
+  }
+
+  .color-wheel-container {
+    @apply relative w-32 h-32 rounded-full border-2 border-cinema-border;
+    background: conic-gradient(
+      hsl(0, 100%, 50%),
+      hsl(60, 100%, 50%),
+      hsl(120, 100%, 50%),
+      hsl(180, 100%, 50%),
+      hsl(240, 100%, 50%),
+      hsl(300, 100%, 50%),
+      hsl(360, 100%, 50%)
+    );
+  }
+
+  .viewfinder-overlay {
+    @apply absolute inset-0 pointer-events-none;
+    background:
+      linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 33.333% 33.333%;
+  }
+
+  .letterbox {
+    @apply relative overflow-hidden;
+  }
+
+  .letterbox::before,
+  .letterbox::after {
+    content: '';
+    @apply absolute left-0 right-0 bg-black z-10;
+    height: 12%;
+  }
+
+  .letterbox::before {
+    top: 0;
+  }
+
+  .letterbox::after {
+    bottom: 0;
+  }
+}
+
+@keyframes filmGrain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-1%, -1%); }
+  20% { transform: translate(1%, 0%); }
+  30% { transform: translate(0%, 1%); }
+  40% { transform: translate(-1%, 1%); }
+  50% { transform: translate(1%, -1%); }
+  60% { transform: translate(0%, -1%); }
+  70% { transform: translate(-1%, 0%); }
+  80% { transform: translate(1%, 1%); }
+  90% { transform: translate(0%, 0%); }
+}
